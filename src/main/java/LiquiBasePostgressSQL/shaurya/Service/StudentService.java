@@ -1,8 +1,9 @@
 package com.example.shaurya.Service;
 
-import Model.Student;
+import com.example.shaurya.Model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -48,5 +49,23 @@ public class StudentService {
             e.printStackTrace();
             return false;
         }
+    }
+    public boolean getAllStudents() {
+        String sql = "SELECT * FROM Students";
+
+        try{
+            Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                return true;
+            }
+            connection.close();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
     }
 }
