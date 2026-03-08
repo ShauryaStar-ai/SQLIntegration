@@ -6,3 +6,6 @@ CREATE TABLE Students (
     name VARCHAR(255) NOT NULL,
     emailAddress VARCHAR(255) NOT NULL
 );
+
+
+

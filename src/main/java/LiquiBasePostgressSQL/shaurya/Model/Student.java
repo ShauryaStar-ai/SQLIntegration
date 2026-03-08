@@ -1,4 +1,4 @@
-package com.example.shaurya.Model;
+package LiquiBasePostgressSQL.shaurya.Model;
 
 public class Student {
     private int id;
@@ -10,11 +10,24 @@ public class Student {
         this.name = name;
         this.emailAddress = emailAddress;
     }
+    public Student( String name, String emailAddress) {
+        this.id = -1;
+        this.name = name;
+        this.emailAddress = emailAddress;
+    }
 
     public Student() {
         this.id = -1;
         this.name = "unknown";
         this.emailAddress = "notGiven";
+    }
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                '}';
     }
 
     public int getId() {
