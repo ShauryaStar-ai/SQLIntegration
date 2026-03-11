@@ -7,5 +7,3 @@ CREATE TABLE Students (
     emailAddress VARCHAR(255) NOT NULL
 );
 
-
-

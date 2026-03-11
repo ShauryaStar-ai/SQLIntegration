@@ -6,3 +6,7 @@ databaseChangeLog:
 
   - include:
       file: db/changelog/03-create-Images-table.sql
+  - include:
+      file: db/changelog/04-add-bankAccNum-and-balance-to-student-table.sql
+  - include:
+      file: db/changelog/05-alter-student-table-bankaccnum-serial.sql

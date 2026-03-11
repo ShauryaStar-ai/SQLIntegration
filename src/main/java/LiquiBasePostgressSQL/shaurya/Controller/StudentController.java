@@ -15,7 +15,7 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<?> makeStudent(@RequestBody Student student){
         boolean success = studentService.makeStudent(student);
         if (success) {
@@ -47,6 +47,32 @@ public class StudentController {
             return ResponseEntity.status(500).body("Student could not be edited");
         }
 
+    }
+    @PostMapping("/send-money")
+    public ResponseEntity<?> sendMoneryFromOneAccToOther(@RequestBody Map<String, Object> payload){
+        if (!payload.containsKey("from") || !payload.containsKey("to") || !payload.containsKey("amount")) {
+            return ResponseEntity.status(400).body("Missing required fields");
+        }
+
+        int fromId;
+        int toId;
+        double amount;
+
+        try {
+            // Safe extraction handling both Number and String types from JSON
+            fromId = Integer.parseInt(payload.get("from").toString());
+            toId = Integer.parseInt(payload.get("to").toString());
+            amount = Double.parseDouble(payload.get("amount").toString());
+        } catch (NumberFormatException e) {
+            return ResponseEntity.status(400).body("Invalid number format in request");
+        }
+
+        boolean success = studentService.sendMoneryFromOneAccToOther(fromId, toId, amount);
+        if (success) {
+            return ResponseEntity.status(200).body("Transaction successful");
+        } else {
+            return ResponseEntity.status(500).body("Transaction failed");
+        }
     }
     @GetMapping("/getStudentByID")
     public ResponseEntity<?> getStudentByID(@RequestParam int id){
